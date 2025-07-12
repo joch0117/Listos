@@ -1,0 +1,55 @@
+.header {
+  background-color: #22272e;
+  height: 5rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  height: 5rem;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.title {
+  flex: 1;
+  text-align: center;
+}
+
+.logo img {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: block;
+}
+
+.dropbtn {
+  background-color: #181818;
+  color: #f5f5f7;
+  border-radius: 12%;
+  padding: 0.5rem 0.5rem;
+  border: none;
+  font-size: 1.1rem;
+  min-width: 120px;
+  cursor: pointer;
+  transition: background 0.2;
+}
+
+.menu ul {
+  display: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #181818;
+  color: #f5f5f7;
+  font-family: "Inter", "Sgoe UI", arial, sans-serif;
+}
+
+/*# sourceMappingURL=style.css.map */

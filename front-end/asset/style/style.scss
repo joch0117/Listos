@@ -1,0 +1,17 @@
+@use 'variables' as v;
+@use 'components/header';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: v.$primary;
+    color: v.$text;
+    font-family: v.$font-main;
+    }
+
+
+
