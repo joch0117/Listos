@@ -1,17 +1,30 @@
 @use 'variables' as v;
 @use 'components/header';
+@use 'components/footer';
+@use 'components/acceuil';
 
+
+//remise à zero
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+//style général
+
 body{
     background-color: v.$primary;
     color: v.$text;
     font-family: v.$font-main;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     }
+
+main{
+    flex:1;
+}
 
 
 

@@ -30,16 +30,61 @@
 .dropbtn{
     background-color:v.$primary;
     color:v.$text;
-    border-radius:12%;
-    padding: 0.5rem 0.5rem;
+    border-radius:0.375rem;
+    padding: 0.375rem 0.75rem;
     border: none;
-    font-size: 1.1rem;
+    font-size: 1rem;
     min-width: 120px;
     cursor:pointer;
     transition: background 0.2;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.07);
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+    background: v.$text;
+    color: v.$primary;
+    outline: none;
+    border: 1.5px solid v.$primary;
+}
+.menu{
+    position:relative;
 }
 
 .menu ul{
+    position:absolute;
+    top:110%;
+    right:0;
     display: none;
+    list-style: none;
+    padding: 0;
+    margin:0;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 18 px rgba(0,0,0,0.10);
+    min-width: 170px;
+    z-index: 50;
+    opacity:0;
+    pointer-events:none;
+    transform: translate(-10px);
+    transition: opacity 0.23s, transform 0.23s;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: v.$primary;
+    display:block;
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    transition: background 0.2,color 0.2;
+}
+
+.menu.open ul{
+    display:block;
+    background-color: v.$text;
+    color: v.$primary;
+    box-shadow: 0 2px 4px v.$secondary;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
 }
 

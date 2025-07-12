@@ -1,0 +1,13 @@
+@use '../variables.scss' as v;
+
+footer{
+    background-color: v.$secondary;
+    height:5rem;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    margin: 0 auto;
+    height:5rem;
+    padding:0 2rem;
+    width: 100%;
+}
