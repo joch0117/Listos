@@ -228,7 +228,7 @@ footer {
   transition: background 0.2s, box-shadow 0.2s;
 }
 .form-card form input[type=submit]:hover, .form-card form input[type=submit]:focus {
-  background: rgb(0, 147.2962264151, 166.1);
+  background: #00bcd4, 9%;
   box-shadow: 0 4px 18px rgba(40, 209, 115, 0.13);
 }
 .form-card p {
@@ -242,7 +242,7 @@ footer {
   transition: color 0.2s;
 }
 .form-card p a:hover {
-  color: rgb(0, 142.7735849057, 161);
+  color: #00bcd4, 10%;
   text-decoration: underline;
 }
 
@@ -254,6 +254,7 @@ footer {
 
 .sidebar {
   width: 240px;
+  min-height: 100vh;
   background: rgba(30, 32, 36, 0.97);
   box-shadow: 4px 0 18px -4px rgba(0, 0, 0, 0.09);
   border-right: 1.5px solid rgba(255, 255, 255, 0.06);
@@ -295,7 +296,7 @@ footer {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 .sidebar .new-board-btn:hover, .sidebar .new-board-btn:focus {
-  background: rgb(0, 147.2962264151, 166.1);
+  background: #00bcd4, 9%;
   transform: translateY(-1.5px) scale(1.025);
   box-shadow: 0 2px 12px rgba(40, 209, 115, 0.12);
 }
@@ -395,6 +396,30 @@ body {
 
 main {
   flex: 1;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#header {
+  flex-shrink: 0;
+}
+
+#app {
+  flex: 1 0 auto;
+}
+
+#footer {
+  flex-shrink: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

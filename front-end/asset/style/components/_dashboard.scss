@@ -11,6 +11,7 @@
 // == Sidebar == //
 .sidebar {
     width: 240px;
+    min-height: 100vh;
     background: rgba(30, 32, 36, 0.97); 
     box-shadow: 4px 0 18px -4px rgba(0,0,0,0.09); 
     border-right: 1.5px solid rgba(255,255,255,0.06); 
@@ -31,9 +32,9 @@
     color: #fff;
     font-weight: 600;
     border: none;
-    border-radius: 1.2em; // moins “pill”
-    padding: 0.48em 1.05em; // réduit
-    font-size: 0.99em; // plus petit
+    border-radius: 1.2em; 
+    padding: 0.48em 1.05em; 
+    font-size: 0.99em; 
     box-shadow: 0 1px 6px rgba(40,209,115,0.07);
     cursor: pointer;
     transition: background 0.17s, transform 0.13s, box-shadow 0.2s;
@@ -54,7 +55,7 @@
         }
 
     &:hover, &:focus {
-    background: darken(v.$accent, 9%);
+    background: v.$accent, 9%;
     transform: translateY(-1.5px) scale(1.025);
     box-shadow: 0 2px 12px rgba(40,209,115,0.12);
     }
@@ -126,7 +127,7 @@ h2 {
     .dashboard {
     flex-direction: column;
 }
-  .sidebar {
+    .sidebar {
     width: 100%;
     box-shadow: none;
     border-right: none;

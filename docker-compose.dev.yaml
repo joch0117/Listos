@@ -1,0 +1,52 @@
+services:
+
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: listos
+      MYSQL_ROOT_PASSWORD: lithium
+      MYSQL_USER: listos
+      MYSQL_PASSWORD: hydrogene
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - listosnet
+
+  back:
+    build: ./back-end
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "mysql://listos:lithium@db:3306/listos"
+    networks:
+      - listosnet
+
+  front:
+    image: nginx:alpine
+    volumes:
+      - ./front-end:/usr/share/nginx/html:ro
+      - ./nginx/front.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "8080:80"
+    networks:
+      - listosnet
+
+  reverse:
+    image: nginx:alpine
+    volumes:
+      - ./nginx/reverse.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - front
+      - back
+    networks:
+      - listosnet
+
+volumes:
+  dbdata:
+
+networks:
+  listosnet:
