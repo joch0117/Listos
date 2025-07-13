@@ -1,4 +1,4 @@
-import { dropdown } from './dropdown.js'; //menu dropdown toute les pages 
+import { dropdown } from './dropdown.js'; //menu dropdown toutes les pages 
 
 
 

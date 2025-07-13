@@ -1,7 +1,5 @@
 //fonction pour le menu page d'acceuil dropdown menu
 
-selector=document.getElementById('dropdownToggle')
-
 export function dropdown(btn){
   if (!btn) return;
   console.log(btn)
@@ -18,5 +16,3 @@ export function dropdown(btn){
     }
   })
 }
-
-dropdown(selector);
