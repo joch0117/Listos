@@ -15,7 +15,10 @@ services:
 
   back:
     build: ./back-end
+    volumes:
+    - ./back-end:/var/www/html
     restart: unless-stopped
+    command: php -S 0.0.0.0:8000 -t public
     depends_on:
       - db
     environment:
