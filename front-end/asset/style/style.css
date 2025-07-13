@@ -86,6 +86,15 @@
   transform: translateY(0);
 }
 
+.menu.open ul li:hover {
+  background-color: #181818;
+  color: #f5f5f7;
+}
+
+.menu.open ul li:hover a {
+  color: #f5f5f7;
+}
+
 footer {
   background-color: #22272e;
   height: 5rem;

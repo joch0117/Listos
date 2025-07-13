@@ -88,3 +88,11 @@
     transform: translateY(0);
 }
 
+.menu.open ul li:hover {
+    background-color: v.$primary;
+    color: v.$text;
+}
+.menu.open ul li:hover a {
+    color: v.$text;
+}
+
