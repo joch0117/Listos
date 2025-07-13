@@ -7,7 +7,7 @@ services:
       MYSQL_DATABASE: listos
       MYSQL_ROOT_PASSWORD: lithium
       MYSQL_USER: listos
-      MYSQL_PASSWORD: hydrogene
+      MYSQL_PASSWORD: lithium
     volumes:
       - dbdata:/var/lib/mysql
     networks:

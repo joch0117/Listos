@@ -1,6 +1,6 @@
 FROM php:8.3-fpm-alpine 
-# image alpine légére
-# installation des paquets nécessaire
+
+# installation des paquets nécessaires
 RUN apk add --no-cache \
     git \
     unzip \
@@ -20,3 +20,16 @@ RUN apk add --no-cache \
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
+
+# copie le code source dans l'image
+COPY . .
+
+# install des dépendances Composer
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader || true
+
+# permissions (en dev)
+RUN chown -R www-data:www-data var
+
+EXPOSE 9000
+
+
