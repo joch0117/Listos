@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./asset/style/style.css">
+    <title>Acceuil - Listos</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <img src="./asset/image/logo.png" alt="logo listos">
+            </div>
+                <h1 class="title">Listos</h1>
+            <div class="menu">
+                <button class="dropbtn" id="dropdownToggle">Menu</button>
+                <ul>
+                    <li><a href="">Acceuil</a></li>
+                    <li><a href="">Se connecter</a></li>
+                    <li><a href="">S'inscrire</a></li>
+                    <li><a href="">Mes tableaux</a></li>
+                </ul>
+            </div>
+            <div></div>
+        </nav>
+    </header>
+    <main class="form">
+        <section class="form-card">
+            <h2>S'inscrire</h2>
+        <form action="" method="post">
+            <div>
+                <label for="pseudo">Mon Pseudo</label>
+                <input type="text" name="pseudo" id="pseudo">
+            </div>
+            <div>
+                <label for="name">Mon Nom</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div>
+                <label for="firstname">Mon Prénom</label>
+                <input type="text" name="firstname" id="firstname">
+            </div>
+            <div>
+                <label for="">Votre Email</label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div>
+                <label for="password">Mot de passe</label>
+                <input type="password" name="password" id="password">
+                <small>8 caractères minimum dont 1 lettre majuscule , un chiffre et un caractére spécial minimum.</small>
+            </div>
+            <div>
+                <label for="VerifPassword">Vérification de votre mot de passe</label>
+                <input type="Password" name="VerifPassword" id="VerifPassword">
+            </div>
+            <div>
+                <input type="submit" value="s'inscrire">
+            </div>
+        </form>
+            <p><a href="">Déjà Inscrit?</a></p>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Listos - <a href="">Mentions légales</a> - <a href="">CGU</a></p>
+    </footer>
+    <script src="./asset/js/dropdown.js"></script>
+</body>
+</html>

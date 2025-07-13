@@ -1,9 +1,8 @@
 //fonction pour le menu page d'acceuil dropdown menu
-console.log("Acceuil");
 
 selector=document.getElementById('dropdownToggle')
 
-function dropdown(btn){
+export function dropdown(btn){
   if (!btn) return;
   console.log(btn)
   let menu = btn.parentNode;
