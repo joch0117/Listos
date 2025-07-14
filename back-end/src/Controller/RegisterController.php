@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class RegistController
+class RegisterController
 {
     #[Route('/api/register', name: 'api_register', methods: ['POST'])]
     public function __invoke(
@@ -33,6 +33,7 @@ class RegistController
         $user->setName($data['name'] ?? '');
         $user->setPrenom($data['prenom'] ?? '');
         $user->setRoles(['ROLE_USER']);
+        $user->setPlainPassword($data['plainPassword'] ?? '');
 
         //  Hasher le password
         if (empty($data['plainPassword'])) {

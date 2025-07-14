@@ -1,15 +1,24 @@
 // router.js
+//import module dropdown
 import { dropdown } from './dropdown.js';
+//import module register
+import { initRegisterForm } from './register.js';
+
 // Fonction pour charger un partial HTML dans un conteneur (header, app, footer)
 export async function loadPartial(containerId, partialFile) {
     const res = await fetch(`partials/${partialFile}`);
     const html = await res.text();
     document.getElementById(containerId).innerHTML = html;
-
+    //module dropdown
             if (containerId === "header") {
         const btn = document.getElementById('dropdownToggle');
         if (btn) dropdown(btn);
     }
+    //module inscription
+    if(window.location.hash === '#inscription'){
+        initRegisterForm();
+    }
+
 }
 
 export async function route() {

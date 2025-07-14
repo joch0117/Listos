@@ -55,7 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 250)]
     #[Assert\NotBlank]
-    #[Assert\Length(min: 60, max: 250)] // hash bcrypt/argon
+    #[Assert\Length(min: 60, max: 250)] 
     private ?string $password = null;
 
     #[Assert\NotBlank(groups: ['registration'])]
