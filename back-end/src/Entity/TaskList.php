@@ -7,8 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+
 
 #[ORM\Entity(repositoryClass: TaskListRepository::class)]
+#[ApiResource(security: "Object == null or object.getUser() == user")]
+#[ApiFilter(SearchFilter::class, properties: ['user' => 'exact'])]
 class TaskList
 {
     #[ORM\Id]

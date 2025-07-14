@@ -6,7 +6,7 @@ use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Repository\UserRepository;
 
-class HashService
+class UserService
 {
     private UserPasswordHasherInterface $hasher;
     private UserRepository $userRepo;

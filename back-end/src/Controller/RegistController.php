@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controller\Api;
+namespace App\Controller;
 
 use App\Entity\User;
-use App\Service\HashService;
+use App\Service\UserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,19 +11,19 @@ use Symfony\Component\Routing\Annotation\Route;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class RegisterController
+class RegistController
 {
     #[Route('/api/register', name: 'api_register', methods: ['POST'])]
     public function __invoke(
         Request $request,
         EntityManagerInterface $em,
-        HashService $hs,
+        UserService $us,
         ValidatorInterface $validator,
         JWTTokenManagerInterface $jwtManager
     ): JsonResponse {
         $data = json_decode($request->getContent(), true);
         /// vérif unicité mot de passe 
-        if (!$hs->isEmailUnique($data['email'] ?? '')) {
+        if (!$us->isEmailUnique($data['email'] ?? '')) {
             return new JsonResponse(['error' => 'Cet email est déjà utilisé.'], 400);
         }
 
@@ -38,7 +38,7 @@ class RegisterController
         if (empty($data['plainPassword'])) {
             return new JsonResponse(['error' => 'Mot de passe obligatoire'], 400);
         }
-        $hashed = $hs->hashPassword($user, $data['plainPassword']);
+        $hashed = $us->hashPassword($user, $data['plainPassword']);
         $user->setPassword($hashed);
 
         $errors = $validator->validate($user, null, ['registration']);
