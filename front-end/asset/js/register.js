@@ -1,4 +1,5 @@
 //js/register
+import { saveToken } from './token.js';
 
 export function initRegisterForm(){
     const form = document.querySelector('form');
@@ -37,7 +38,7 @@ export function initRegisterForm(){
             const result = await response.json();
 
             if(response.ok){
-                localStorage.setItem('jwt', result.token);
+                saveToken(result.token);
                 alert("Inscription réussi !");
                 window.location.hash = "#accueil";
             }else{

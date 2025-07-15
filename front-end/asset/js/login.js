@@ -1,4 +1,5 @@
 // js login
+import { saveToken } from './token.js';
 
 export function initLogin(){
     const form = document.querySelector('form');
@@ -24,7 +25,7 @@ export function initLogin(){
             const result = await response.json();
             
             if(response.ok){
-                localStorage.setItem('jwt',result.token);
+                saveToken(result.token);
                 alert("connexion réussi !");
                 window.location.hash = "#acceuil";
             }else {
