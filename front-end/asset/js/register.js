@@ -27,7 +27,7 @@ export function initRegisterForm(){
             email,
             plainPassword
         };
-console.log(data)
+
         try{
             const response = await fetch('http://localhost/api/register',{
                 method: 'POST',

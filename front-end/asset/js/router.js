@@ -1,6 +1,7 @@
 // router.js
 //import module dropdown
 import { dropdown } from './dropdown.js';
+import { initLogin } from './login.js';
 //import module register
 import { initRegisterForm } from './register.js';
 
@@ -17,6 +18,11 @@ export async function loadPartial(containerId, partialFile) {
     //module inscription
     if(window.location.hash === '#inscription'){
         initRegisterForm();
+    }
+
+    //module connexion
+    if(window.location.hash === '#connexion'){
+        initLogin();
     }
 
 }
