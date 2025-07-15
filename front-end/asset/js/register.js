@@ -1,5 +1,7 @@
 //js/register
 import { saveToken } from './token.js';
+import { showMessage } from './showMessage.js';
+import { loadDropdownMenu } from './dropdownLoader.js';
 
 export function initRegisterForm(){
     const form = document.querySelector('form');
@@ -16,7 +18,7 @@ export function initRegisterForm(){
         const verifPassword = document.getElementById('verifPassword').value.trim();
 
         if (plainPassword != verifPassword){
-            alert("Les mots de passes ne correspondent pas !");
+            showMessage("error",result.error || "Les mot de pass ne correspondent pas.");
             return;
         }
 
@@ -39,13 +41,14 @@ export function initRegisterForm(){
 
             if(response.ok){
                 saveToken(result.token);
-                alert("Inscription réussi !");
+                await loadDropdownMenu();  
+                showMessage('success', "inscription réussie !");
                 window.location.hash = "#accueil";
             }else{
-                alert(result.error || "Erreur lors de l'inscription");
+                showMessage('error',result.error || "Erreur lors de l'inscription");
             }
         }catch (error){
-            alert("Error réseau :" + error.message);
+            showMessage('error'+'erreur réseau');
         }
     });
 }

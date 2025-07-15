@@ -2,7 +2,6 @@
 
 export function dropdown(btn){
   if (!btn) return;
-  console.log(btn)
   let menu = btn.parentNode;
 
   btn.addEventListener("click", function(e){

@@ -1,5 +1,6 @@
 // js login
 import { saveToken } from './token.js';
+import { showMessage } from './showMessage.js';
 
 export function initLogin(){
     const form = document.querySelector('form');
@@ -17,22 +18,27 @@ export function initLogin(){
         }
 
         try{
-            const response = await fetch('http://localhost/api/login',{
+            const response = await fetch('http://localhost/api/login_check',{
                 method: 'POST',
                 headers: {'Content-Type' : 'application/json'},
                 body: JSON.stringify(data)
             })
-            const result = await response.json();
-            
+            let result = null
+            try{
+            result = await response.json();
+            }catch(e){
+                result = {};
+            }
+
             if(response.ok){
                 saveToken(result.token);
-                alert("connexion réussi !");
-                window.location.hash = "#acceuil";
+                showMessage('success', "Connexion réussie !");
+                window.location.hash = "#accueil";
             }else {
-                alert(result.error || "Erreur lors de l'inscription");
+                alert(result.error || "Erreur lors de la connexion");
             }
         }catch (error){
-            alert("Error réseau :"+ error.message);
+            showMessage('error', result.error || "Erreur lors de la connexion");
         }
     });
 }
