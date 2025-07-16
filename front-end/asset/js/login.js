@@ -35,7 +35,7 @@ export function initLogin(){
                 showMessage('success', "Connexion réussie !");
                 window.location.hash = "#accueil";
             }else {
-                alert(result.error || "Erreur lors de la connexion");
+                showMessage(result.error || "Erreur lors de la connexion");
             }
         }catch (error){
             showMessage('error', result.error || "Erreur lors de la connexion");

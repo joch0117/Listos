@@ -1,112 +1,98 @@
-@use '../variables.scss' as v;
-
-
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
 
 .form {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: v.$primary; 
+    background: v.$color-primary;
 }
 
 .form-card {
-    background: v.$secondary; 
-    border-radius: 1.2em;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.12);
-    padding: 2.5em 2em 2em 2em;
+    @include m.card(v.$color-secondary, v.$color-text, 1.2em, v.$shadow-md, 2.5em 2em 2em 2em);
     width: 100%;
     max-width: 410px;
 
     h2 {
-        margin-bottom: 1em;
-        color: v.$accent; 
-        text-align: center;
-        font-weight: 700;
-        font-size: 1.6em;
-        letter-spacing: 0.04em;
+    margin-bottom: 1em;
+    color: v.$color-accent;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.6em;
+    letter-spacing: 0.04em;
     }
 
     form {
-        display: flex;
-        flex-direction: column;
-        gap: 1.1em;
-    
+    display: flex;
+    flex-direction: column;
+    gap: 1.1em;
+
         div {
-        display: flex;
-        flex-direction: column;
-        gap: 0.2em;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2em;
 
-        label {
-            font-weight: 500;
-            color: v.$text;
-            margin-bottom: 0.2em;
-            font-size: 1em;
-        }
+            label {
+                font-weight: 500;
+                color: v.$color-text;
+                margin-bottom: 0.2em;
+                font-size: 1em;
+            }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            padding: 0.7em 1em;
-            border-radius: 0.5em;
-            border: 1px solid v.$primary; 
-            background: #151517; 
-            color: v.$text;
-            font-size: 1em;
-            transition: border 0.2s, box-shadow 0.2s;
-
+            input[type="text"],
+            input[type="email"],
+            input[type="password"] {
+            @include m.input();
             &:focus {
-            outline: none;
-            border-color: v.$accent;
-            box-shadow: 0 0 0 2px rgba(40, 209, 115, 0.15);
+                outline: none;
+                border-color: v.$color-accent;
+                box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.15); // accent color
             }
         }
 
-        small {
-            color: #ccc;
-            font-size: 0.92em;
-            margin-top: 0.1em;
-            margin-left: 0.2em;
-        }
+    small {
+        color: #ccc;
+        font-size: 0.92em;
+        margin-top: 0.1em;
+        margin-left: 0.2em;
+    }
     }
 
-        input[type="submit"] {
+    input[type="submit"] {
+        @include m.btn();
         margin-top: 0.7em;
-        padding: 0.8em 1.2em;
-        border-radius: 0.7em;
-        border: none;
-        background: v.$accent; 
-        color: #fff;
-        font-weight: 700;
-        font-size: 1.08em;
-        letter-spacing: 0.04em;
-        cursor: pointer;
-        box-shadow: 0 2px 8px rgba(40,209,115,0.07);
-        transition: background 0.2s, box-shadow 0.2s;
-
         &:hover, &:focus {
-            background: v.$accent, 9%;
-            box-shadow: 0 4px 18px rgba(40,209,115,0.13);
-        }
-        }
-    }
-
-    p {
-        text-align: center;
-        margin-top: 1em;
-
-    a {
-        color: v.$accent;
-        text-decoration: none;
-        font-weight: 600;
-        transition: color 0.2s;
-
-        &:hover {
-        color: v.$accent, 10%;
-        text-decoration: underline;
-            }
+            background: lighten(v.$color-accent, 10%);
+            box-shadow: 0 4px 18px rgba(0,188,212,0.13);
         }
     }
 }
+p {
+    text-align: center;
+    margin-top: 1em;
+
+    a {
+    color: v.$color-accent;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+
+    &:hover {
+        color: lighten(v.$color-accent, 10%);
+        text-decoration: underline;
+        }
+    }
+}
+}
+
+// Responsive optionnel
+@media (max-width: v.$bp-mobile) {
+.form-card {
+    padding: v.$spacing-md;
+    max-width: 98vw;
+}
+}
+
 
 

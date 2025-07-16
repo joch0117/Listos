@@ -1,0 +1,105 @@
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+.header {
+    background-color: v.$color-secondary;
+    height: 5rem;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    height: 5rem;
+    padding: 0 v.$spacing-lg;
+    width: 100%;
+}
+
+.title {
+    flex: 1;
+    text-align: center;
+    color: v.$color-text;
+    font-family: v.$font-main;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.logo img {
+    width: 4rem;
+    height: 4rem;
+    display: block;
+}
+
+.btn, .dropbtn {
+    @include m.btn(
+    $bg: v.$color-primary,
+    $color: v.$color-text,
+    $radius: 2em, // arrondi style pilule
+    $shadow: 0 2px 8px rgba(0,0,0,0.13),
+    $padding: 0.6em 2em,
+    $font-size: 1.08em
+);
+    &:hover,
+    &:focus {
+    background: v.$color-text;       // fond devient blanc
+    color: v.$color-primary;         // texte devient foncé
+    border: 1.5px solid v.$color-primary;  // petite bordure foncée visible
+    outline: none;
+    transition: background 0.2s, color 0.2s, border 0.17s;
+    }
+    &:active {
+    background: lighten(v.$color-text, 5%);
+    color: v.$color-primary;
+    transform: scale(0.97);
+    }
+}
+
+
+.menu {
+    position: relative;
+    ul {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: v.$radius;
+    box-shadow: v.$shadow-md;
+    min-width: 170px;
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.23s, transform 0.23s;
+    background: v.$color-text;
+    }
+ul li a {
+    color: v.$color-primary;
+    display: block;
+    padding: v.$spacing-sm v.$spacing-md;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+    &.open ul {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    }
+    &.open ul li:hover,
+    &.open ul li:focus-within {
+    background: v.$color-primary;
+    a {
+        color: v.$color-text;
+    }  
+}
+}
+
+#header {
+    flex-shrink: 0;
+}

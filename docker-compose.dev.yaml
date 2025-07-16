@@ -8,6 +8,8 @@ services:
       MYSQL_ROOT_PASSWORD: lithium
       MYSQL_USER: listos
       MYSQL_PASSWORD: lithium
+    ports :
+      -"3307:3307"
     volumes:
       - dbdata:/var/lib/mysql
     networks:

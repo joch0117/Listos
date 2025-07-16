@@ -5,7 +5,9 @@ import { showMessage } from './showMessage.js';
 
 export function logout(){
     removeToken();
+    showMessage('success', "Déconnexion réussie !");
+    setTimeout(()=> {
     window.location.hash ='#accueil';
     location.reload();
-    showMessage('success', "Déconnexion réussie !");
+    },1200);
 }

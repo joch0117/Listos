@@ -1,38 +1,43 @@
-@use 'variables' as v;
-@use 'components/header';
-@use 'components/footer';
-@use 'components/acceuil';
+
+// === ABSTRACTS (variables, mixins, fonctions...) ===
+@use 'abstracts/variables' as v;
+@use 'abstracts/mixins';
+
+// === BASE ===
+@use 'base/reset';
+@use 'base/typography' ;
+
+// === LAYOUT ===
+@use 'layout/header';
+@use 'layout/footer';
+
+// === COMPONENTS ===
+@use 'components/message';
 @use 'components/form';
-@use 'components/dashboard';
+
+// === PAGES ===
+@use 'pages/acceuil';
+@use 'pages/dashboard';
 
 
-//remise à zero
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 //style général
 
-body{
-    background-color: v.$primary;
-    color: v.$text;
+body {
+    background-color: v.$color-primary;
+    color: v.$color-text;
     font-family: v.$font-main;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    }
+}
+
 
 main{
     flex:1;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
+
 
 body {
     min-height: 100vh;
@@ -40,17 +45,13 @@ body {
     flex-direction: column;
 }
 
-#header {
-    flex-shrink: 0;
-}
+
 
 #app {
     flex: 1 0 auto;
 }
 
-#footer {
-    flex-shrink: 0;
-}
+
 
 
 

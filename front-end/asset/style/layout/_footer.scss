@@ -1,0 +1,28 @@
+@use '../abstracts/variables' as v;
+
+.footer {
+    background-color: v.$color-secondary;
+    min-height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 v.$spacing-lg;
+    text-align: center;
+    color: v.$color-text;
+    font-size: 1rem;
+    font-family: v.$font-main;
+    letter-spacing: 0.02em;
+    border-top: 1px solid lighten(v.$color-secondary, 10%);
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
+
+  // Responsive (optionnel si tu veux)
+    @media (max-width: v.$bp-mobile) {
+    font-size: 0.95rem;
+    padding: 0 v.$spacing-sm;
+    }
+}
+
+#footer {
+    flex-shrink: 0;
+}

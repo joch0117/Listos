@@ -1,0 +1,46 @@
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+#messageContainer {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.message {
+    padding: 1em 2em;
+    margin: 0.5em auto;
+    border-radius: v.$radius-md;
+    font-weight: bold;
+    box-shadow: v.$shadow-lg;
+    pointer-events: auto;
+    opacity: 0.98;
+    transition: opacity 0.3s, transform 0.2s;
+
+    &.success {
+    @include m.message-type(v.$color-success-bg, v.$color-success-text, v.$color-success-border);
+    }
+    &.error {
+    @include m.message-type(v.$color-error-bg, v.$color-error-text, v.$color-error-border);
+    }
+  // Variante "info" ou "warning" possible ici
+    &.info {
+    background: v.$color-accent;
+    color: v.$color-primary;
+    border: 1px solid lighten(v.$color-accent, 30%);
+    }
+}
+
+@media (max-width: v.$bp-mobile) {
+    .message {
+    padding: 0.7em 1em;
+    font-size: 0.98em;
+    }
+}
+

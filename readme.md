@@ -55,9 +55,32 @@ projet-root/
 ├── docker-compose.dev.yaml # Environnement Docker de développement
 └── README.md
 
+
+/scss
+  ├─ abstracts/
+  │    ├─ _variables.scss
+  │    ├─ _mixins.scss
+  │    └─ _functions.scss
+  ├─ base/
+  │    ├─ _reset.scss
+  │    └─ _typography.scss
+  ├─ layout/
+  │    ├─ _header.scss
+  │    ├─ _footer.scss
+  │    └─ _sidebar.scss
+  ├─ components/
+  │    ├─ _button.scss
+  │    ├─ _card.scss
+  │    ├─ _list.scss
+  │    ├─ _modal.scss
+  │    └─ _inline-edit.scss
+  ├─ pages/
+  │    ├─ _dashboard.scss
+  │    └─ _acceuil.scss
+  └─ main.scss
+
 yaml
-Copier
-Modifier
+
 
 ---
 

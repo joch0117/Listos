@@ -1,0 +1,68 @@
+@use '../abstracts/variables' as v;
+
+// === Mixin bouton générique ===
+@mixin btn(
+    $bg: v.$color-accent,
+    $color: #fff,
+    $radius: v.$radius,
+    $shadow: 0 2px 8px rgba(0,0,0,0.14),
+    $padding: 0.6em 2em,
+    $font-size: 1.08em
+) {
+    background: $bg;
+    color: $color;
+    border: none;
+    border-radius: $radius;
+    padding: $padding;
+    font-size: $font-size;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: $shadow;
+    transition: background 0.2s, box-shadow 0.2s, color 0.2s, transform 0.13s;
+    min-width: 120px;
+}
+
+// === Mixin card générique ===
+@mixin card(
+    $bg: v.$color-secondary,
+    $color: v.$color-text,
+    $radius: v.$radius,
+    $shadow: v.$shadow-md,
+    $padding: v.$spacing-lg v.$spacing-md
+) {
+    background: $bg;
+    color: $color;
+    border-radius: $radius;
+    box-shadow: $shadow;
+    padding: $padding;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+// === Mixin input générique ===
+@mixin input(
+    $bg: #151517,
+    $color: v.$color-text,
+    $border: 1px solid v.$color-primary,
+    $radius: 0.5em
+) {
+    padding: 0.7em 1em;
+    border-radius: $radius;
+    border: $border;
+    background: $bg;
+    color: $color;
+    font-size: 1em;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+// === Mixin message-type (pour les flashs/alertes) ===
+@mixin message-type($bg, $color, $border) {
+    background: $bg;
+    color: $color;
+    border: 1px solid $border;
+}
+
