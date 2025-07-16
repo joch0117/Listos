@@ -9,7 +9,7 @@ services:
       MYSQL_USER: listos
       MYSQL_PASSWORD: lithium
     ports :
-      -"3307:3307"
+      - "3307:3306"
     volumes:
       - dbdata:/var/lib/mysql
     networks:

@@ -36,9 +36,9 @@ export function decodeToken(token){
     const payload = token.split('.')[1];
     if(!payload) return null;
 
-    let base64 = payload.replace(/-/g,'+').replace(/ _/g,'/');
+    let base64 = payload.replace(/-/g,'+').replace(/_/g,'/');
 
-    while (base64.lenght % 4){
+    while (base64.length % 4){
         base64 += '=';
     }
     try{
@@ -46,4 +46,15 @@ export function decodeToken(token){
     }catch (e){
         return null;
     }
+}
+
+
+//extraire l'user
+
+export function getUserId() {
+    const token = getToken();
+    if (!token) return null;
+    const decoded = decodeToken(token);
+
+    return decoded.id || decoded.user_id || decoded.sub;
 }
