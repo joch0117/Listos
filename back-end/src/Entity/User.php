@@ -71,7 +71,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotNull]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\ManyToOne(inversedBy: 'user')]
     private ?Dashboard $dashboard = null;
 
     #[ORM\OneToMany(targetEntity: Map::class, mappedBy: 'user')]

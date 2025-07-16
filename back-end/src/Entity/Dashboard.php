@@ -12,7 +12,7 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: DashboardRepository::class)]
-#[ApiResource(security: "Object == null or object.getUser() == user")]
+#[ApiResource(security: "object == null or object.getUser() == user")]
 #[ApiFilter(SearchFilter::class, properties: ['user' => 'exact'])]
 class Dashboard
 {
@@ -30,7 +30,7 @@ class Dashboard
      * @var Collection<int, User>
      */
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'dashboard')]
-    private Collection $users;
+    private Collection $user;
 
     #[ORM\Column]
     #[Assert\NotNull]
@@ -44,7 +44,7 @@ class Dashboard
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->user = new ArrayCollection();
         $this->taskLists = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
     }
@@ -68,15 +68,15 @@ class Dashboard
     /**
      * @return Collection<int, User>
      */
-    public function getUsers(): Collection
+    public function getUser(): Collection
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function addUser(User $user): static
+    public function addUser(?User $user): static
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
+        if (!$this->user->contains($user)) {
+            $this->user->add($user);
             $user->setDashboard($this);
         }
         return $this;
@@ -84,7 +84,7 @@ class Dashboard
 
     public function removeUser(User $user): static
     {
-        if ($this->users->removeElement($user)) {
+        if ($this->user->removeElement($user)) {
             if ($user->getDashboard() === $this) {
                 $user->setDashboard(null);
             }

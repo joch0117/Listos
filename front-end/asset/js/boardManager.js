@@ -1,5 +1,6 @@
 import BoardApi from './api/boardApi.js';
 import Board from './board.js';
+import { getUserId } from './token.js';
 
 export default class BoardManager {
     constructor() {
@@ -27,7 +28,12 @@ export default class BoardManager {
     // Ajout d’un tableau via l’API
     async handleAddBoard(title = 'Nouveau tableau') {
         try {
-            const boardData = await this.api.addBoard({ title });
+            const userId = getUserId();
+            if (!userId) throw new Error('Utilisateur non connecté');
+            const boardData = await this.api.addBoard({ 
+                title,
+                user:`/api/users/${userId}`
+            });
             const board = new Board(boardData);
             this.boards.push(board);
             this.renderBoards();
