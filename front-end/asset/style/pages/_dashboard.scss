@@ -96,6 +96,7 @@ gap: v.$spacing-lg;
     margin-bottom: 0.5em;
     font-size: 1.35em;
     font-weight: 700;
+    text-align: center;
     }
     p {
     color: v.$color-text;
@@ -128,6 +129,7 @@ gap: v.$spacing-lg;
     }
     .board-content {
         padding: 1.2em 1em;
+        text-align: center;
     }
 }
 
