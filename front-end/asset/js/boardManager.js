@@ -17,11 +17,11 @@ export default class BoardManager {
         const sidebarList = document.querySelector('.board-list');
         if (!sidebarList) return;
         sidebarList.innerHTML = '';
-        this.boards.foreach(board => {
+        this.boards.forEach(board => {
             const li = document.createElement('li');
             li.className = 'board-list-item';
             li.dataset.boardId = board.id;
-            li.innerHTML = `<span class="board-title" contentditable="true">${board.title}</span>`;
+            li.innerHTML = `<span class="board-title" contenteditable="true">${board.title}</span>`;
 
             li.onclick = () => this.selectBoard(board.id);
 

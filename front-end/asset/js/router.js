@@ -5,6 +5,10 @@ import { loadDropdownMenu } from './dropdownLoader.js';
 import { initLogin } from './login.js';
 //import module register
 import { initRegisterForm } from './register.js';
+//import class BoardManager
+import BoardManager from './boardManager.js';
+
+let boardManagerInstance = null;
 
 // Fonction pour charger un partial HTML dans un conteneur (header, app, footer)
 export async function loadPartial(containerId, partialFile) {
@@ -15,12 +19,15 @@ export async function loadPartial(containerId, partialFile) {
     if(window.location.hash === '#inscription'){
         initRegisterForm();
     }
-
     //module connexion
     if(window.location.hash === '#connexion'){
         initLogin();
     }
-
+    //import class gestion board
+    if (window.location.hash === '#tableau') {
+    boardManagerInstance = new BoardManager();
+    boardManagerInstance.init();
+    }
 }
 
 export async function route() {
