@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\Dashboard;
+use App\Entity\Board;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Dashboard>
+ * @extends ServiceEntityRepository<Board>
  */
-class DashboardRepository extends ServiceEntityRepository
+class BoardRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Dashboard::class);
+        parent::__construct($registry, Board::class);
     }
 
 //    /**
-//     * @return Dashboard[] Returns an array of Dashboard objects
+//     * @return Board[] Returns an array of Board objects
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
+//        return $this->createQueryBuilder('b')
+//            ->andWhere('b.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->orderBy('d.id', 'ASC')
+//            ->orderBy('b.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Dashboard
+//    public function findOneBySomeField($value): ?Board
 //    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
+//        return $this->createQueryBuilder('b')
+//            ->andWhere('b.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()

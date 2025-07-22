@@ -10,15 +10,33 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message:'Cet email est déjà utilisé.')]
+#[ApiResource(
+    operations: [
+        new Get(),
+        new GetCollection()
+    ],
+    normalizationContext: ['groups' => ['user:read']],
+    security: "is_granted('ROLE_USER')"
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column(length: 250, unique: true)]
+    #[Assert\NotBlank]
+    #[Assert\Email]
+    #[Assert\Length(min: 5, max: 250)]
+    private ?string $email = null;
+
 
     #[ORM\Column(length: 75)]
     #[Assert\NotBlank]
@@ -45,13 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         pattern: "/^[A-Za-zÀ-ÿ\- ]+$/u",
         message: "Le prénom doit contenir uniquement des lettres, espaces ou tirets."
     )]
-    private ?string $prenom = null;
-
-    #[ORM\Column(length: 250, unique: true)]
-    #[Assert\NotBlank]
-    #[Assert\Email]
-    #[Assert\Length(min: 5, max: 250)]
-    private ?string $email = null;
+    private ?string $surname = null;
 
     #[ORM\Column(length: 250)]
     #[Assert\NotBlank]
@@ -71,24 +83,55 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotNull]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'user')]
-    private ?Dashboard $dashboard = null;
-
-    #[ORM\OneToMany(targetEntity: Map::class, mappedBy: 'user')]
-    private Collection $maps;
-
-    #[ORM\Column(type: 'json')]
+    #[ORM\Column(type: 'json' )]
     private array $roles = [];
+
+    /**
+     * @var Collection<int, Board>
+     */
+    #[ORM\OneToMany(targetEntity: Board::class, mappedBy: 'user',orphanRemoval: true)]
+    private Collection $boards;
+
+    /**
+     * @var Collection<int, TaskList>
+     */
+    #[ORM\OneToMany(targetEntity: TaskList::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $taskLists;
+
+    /**
+     * @var Collection<int, Card>
+     */
+    #[ORM\OneToMany(targetEntity: Card::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $cards;
 
     public function __construct()
     {
-        $this->maps = new ArrayCollection();
+        $this->boards = new ArrayCollection();
+        $this->taskLists = new ArrayCollection();
+        $this->cards = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
+    }
+
+    public function __toString(): string
+    {
+    return $this->email ?? (string) $this->id ?? 'User';
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
     }
 
     public function getPseudo(): ?string
@@ -99,6 +142,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPseudo(string $pseudo): static
     {
         $this->pseudo = $pseudo;
+
         return $this;
     }
 
@@ -110,28 +154,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setName(string $name): static
     {
         $this->name = $name;
+
         return $this;
     }
 
-    public function getPrenom(): ?string
+    public function getSurname(): ?string
     {
-        return $this->prenom;
+        return $this->surname;
     }
 
-    public function setPrenom(string $prenom): static
+    public function setSurname(string $surname): static
     {
-        $this->prenom = $prenom;
-        return $this;
-    }
+        $this->surname = $surname;
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
         return $this;
     }
 
@@ -143,6 +178,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
+
         return $this;
     }
 
@@ -154,6 +190,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPlainPassword(?string $plainPassword): static
     {
         $this->plainPassword = $plainPassword;
+
         return $this;
     }
 
@@ -165,68 +202,120 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-        return $this;
-    }
 
-    public function getDashboard(): ?Dashboard
-    {
-        return $this->dashboard;
-    }
-
-    public function setDashboard(?Dashboard $dashboard): static
-    {
-        $this->dashboard = $dashboard;
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Map>
-     */
-    public function getMaps(): Collection
-    {
-        return $this->maps;
-    }
-
-    public function addMap(Map $map): static
-    {
-        if (!$this->maps->contains($map)) {
-            $this->maps->add($map);
-            $map->setUser($this);
-        }
-        return $this;
-    }
-
-    public function removeMap(Map $map): static
-    {
-        if ($this->maps->removeElement($map)) {
-            if ($map->getUser() === $this) {
-                $map->setUser(null);
-            }
-        }
         return $this;
     }
 
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        $roles[] = 'ROLE_USER';
-        return array_unique($roles);
+        return $this->roles;
     }
 
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
+
         return $this;
     }
 
-    public function eraseCredentials(): void
+    /**
+     * @return Collection<int, Board>
+     */
+    public function getBoards(): Collection
     {
-        $this->plainPassword = null;
+        return $this->boards;
+    }
+
+    public function addBoard(Board $board): static
+    {
+        if (!$this->boards->contains($board)) {
+            $this->boards->add($board);
+            $board->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBoard(Board $board): static
+    {
+        if ($this->boards->removeElement($board)) {
+            // set the owning side to null (unless already changed)
+            if ($board->getUser() === $this) {
+                $board->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TaskList>
+     */
+    public function getTaskLists(): Collection
+    {
+        return $this->taskLists;
+    }
+
+    public function addTaskList(TaskList $taskList): static
+    {
+        if (!$this->taskLists->contains($taskList)) {
+            $this->taskLists->add($taskList);
+            $taskList->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTaskList(TaskList $taskList): static
+    {
+        if ($this->taskLists->removeElement($taskList)) {
+            // set the owning side to null (unless already changed)
+            if ($taskList->getUser() === $this) {
+                $taskList->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Card>
+     */
+    public function getCards(): Collection
+    {
+        return $this->cards;
+    }
+
+    public function addCard(Card $card): static
+    {
+        if (!$this->cards->contains($card)) {
+            $this->cards->add($card);
+            $card->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCard(Card $card): static
+    {
+        if ($this->cards->removeElement($card)) {
+            // set the owning side to null (unless already changed)
+            if ($card->getUser() === $this) {
+                $card->setUser(null);
+            }
+        }
+
+        return $this;
     }
 
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+    return (string) $this->email;
     }
-}
 
+    public function eraseCredentials(): void
+    {
+    $this->plainPassword = null;
+    }
+
+}

@@ -31,7 +31,7 @@ class RegisterController
         $user->setEmail($data['email'] ?? '');
         $user->setPseudo($data['pseudo'] ?? '');
         $user->setName($data['name'] ?? '');
-        $user->setPrenom($data['prenom'] ?? '');
+        $user->setSurname($data['prenom'] ?? '');
         $user->setRoles(['ROLE_USER']);
         $user->setPlainPassword($data['plainPassword'] ?? '');
 

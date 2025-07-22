@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TaskListRepository;
+use App\Entity\Board;
+use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,7 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
-
 
 #[ORM\Entity(repositoryClass: TaskListRepository::class)]
 #[ApiResource(security: "Object == null or object.getUser() == user")]
@@ -28,25 +29,21 @@ class TaskList
     private ?string $title = null;
 
     #[ORM\ManyToOne(inversedBy: 'taskLists')]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotNull]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'taskLists')]
-    private ?Dashboard $dashboard = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $priority = null;
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Board $board = null;
 
     /**
-     * @var Collection<int, Map>
+     * @var Collection<int, Card>
      */
-    #[ORM\OneToMany(targetEntity: Map::class, mappedBy: 'taskList', orphanRemoval: true)]
-    private Collection $maps;
+    #[ORM\OneToMany(targetEntity: Card::class, mappedBy: 'taskList', orphanRemoval: true)]
+    private Collection $cards;
 
     public function __construct()
     {
-        $this->maps = new ArrayCollection();
+        $this->cards = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -62,6 +59,7 @@ class TaskList
     public function setTitle(string $title): static
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -73,55 +71,49 @@ class TaskList
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
         return $this;
     }
 
-    public function getDashboard(): ?Dashboard
+    public function getBoard(): ?Board
     {
-        return $this->dashboard;
+        return $this->board;
     }
 
-    public function setDashboard(?Dashboard $dashboard): static
+    public function setBoard(?Board $board): static
     {
-        $this->dashboard = $dashboard;
-        return $this;
-    }
+        $this->board = $board;
 
-    public function getPriority(): ?int
-    {
-        return $this->priority;
-    }
-
-    public function setPriority(?int $priority): static
-    {
-        $this->priority = $priority;
         return $this;
     }
 
     /**
-     * @return Collection<int, Map>
+     * @return Collection<int, Card>
      */
-    public function getMaps(): Collection
+    public function getCards(): Collection
     {
-        return $this->maps;
+        return $this->cards;
     }
 
-    public function addMap(Map $map): static
+    public function addCard(Card $card): static
     {
-        if (!$this->maps->contains($map)) {
-            $this->maps->add($map);
-            $map->setTaskList($this);
+        if (!$this->cards->contains($card)) {
+            $this->cards->add($card);
+            $card->setTaskList($this);
         }
+
         return $this;
     }
 
-    public function removeMap(Map $map): static
+    public function removeCard(Card $card): static
     {
-        if ($this->maps->removeElement($map)) {
-            if ($map->getTaskList() === $this) {
-                $map->setTaskList(null);
+        if ($this->cards->removeElement($card)) {
+            // set the owning side to null (unless already changed)
+            if ($card->getTaskList() === $this) {
+                $card->setTaskList(null);
             }
         }
+
         return $this;
     }
 }

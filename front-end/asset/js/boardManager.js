@@ -12,7 +12,7 @@ export default class BoardManager {
     // Initialisation du board manager : charge tous les tableaux
     async init() {
         try {
-            const boardsData = await this.api.fetchBoards();
+            const boardsData = await this.api.fetchBoard();
             this.boards = boardsData.map(data => new Board(data));
         } catch (e) {
             console.error("Erreur chargement tableaux:", e);

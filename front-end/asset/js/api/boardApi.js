@@ -2,7 +2,7 @@ import { getToken } from '../token.js';
 
 export default class BoardApi{
     constructor(apiUrl){
-        this.apiUrl = apiUrl || 'http://localhost/api/dashboards';
+        this.apiUrl = apiUrl || 'http://localhost/api/boards';
     }
 
     get headers() {
