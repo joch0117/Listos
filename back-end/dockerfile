@@ -24,7 +24,6 @@ WORKDIR /var/www/html
 # copie le code source dans l'image
 COPY . .
 
-# install des dépendances Composer
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader || true
 
 # permissions (en dev)

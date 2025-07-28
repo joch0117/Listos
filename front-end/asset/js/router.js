@@ -31,7 +31,7 @@ export async function loadPartial(containerId, partialFile) {
 }
 
 export async function route() {
-  // Récupère le hash de l’URL (ex : #connexion, #tableau, etc.)
+  // Récupère le hash de l’URL 
     const page = window.location.hash.replace('#', '') || 'accueil';
     await loadPartial('app', `${page}.html`);
 
