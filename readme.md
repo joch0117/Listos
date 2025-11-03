@@ -1,7 +1,7 @@
 # Listos – Application de gestion de tâches et de listes
 
 Listos est une application web moderne de gestion de tableaux et de listes de tâches, pensée pour être simple, épurée et efficace.
-Elle permet à chaque utilisateur de s’organiser au quotidien à travers des tableaux, des listes et des tâches, tout en offrant un espace administrateur pour la gestion des comptes.
+Elle permet à chaque utilisateur de s’organiser au quotidien à travers des tableaux, des listes et des tâches .
 
 ---
 
@@ -12,7 +12,6 @@ Elle permet à chaque utilisateur de s’organiser au quotidien à travers des t
 * **Ajout et suivi de tâches** (to-do) dans chaque liste
 * **Inscription et connexion sécurisées** (JWT, hashing, validation forte)
 * **Authentification et autorisation API** : seules les ressources de l’utilisateur sont accessibles
-* **Espace administrateur** minimaliste : gestion et suppression des utilisateurs
 * **Interface épurée & responsive**, charte graphique sombre avec accents verts
 * **Front-end** 100% JS natif, HTML, SCSS (Sass) – pas de framework pour l’instant
 * **Back-end** Symfony 7 + API Platform (CRUD auto, doc Swagger intégrée)
@@ -114,7 +113,6 @@ API Symfony sur /api/ via le reverse, ou http://localhost:8000 si le port est ex
 **Connexion BDD testée et opérationnelle** (accès via DBeaver pour vérif)
 
 ## Prochaines étapes
-**Modules CRUD front** (création, édition, suppression des boards, listes, tâches)
 
 **Améliorer l’UX** (messages globaux, gestion des erreurs, spinners, feedback)
 
@@ -130,8 +128,6 @@ API Symfony sur /api/ via le reverse, ou http://localhost:8000 si le port est ex
 
 ## À venir / TODO
 Sécurisation avancée de l’API (JWT, rôles, CORS, etc.)
-
-Ajout d’API Platform (documentation auto, filtres…)
 
 Modules CRUD front (Dashboard, TaskList, Map)
 
